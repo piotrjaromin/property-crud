@@ -1,0 +1,15 @@
+{
+    "port" : 3001,
+    "postgres" : {
+        "host" : "127.0.0.1",
+        "user" : "postgres",
+        "password" : "admin",
+        "database" : "properties"
+    },
+    "airbnb": {
+        "roomsUrl": "https://www.airbnb.co.uk/rooms",
+        "cache": {
+            "stdTTL": 600
+        }
+    }
+}

@@ -1,0 +1,33 @@
+
+version: "3"
+services:
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db-init-docker:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+    environment:
+      - POSTGRES_PASSWORD=admin
+
+  backend:
+    build: .
+    ports:
+      - 3001:3001
+    networks:
+      - backend
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=docker
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3001/properties"]
+        interval: 3s
+        timeout: 10s
+        retries: 5
+
+networks:
+  backend:
