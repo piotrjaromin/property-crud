@@ -1,10 +1,10 @@
 import React from 'react';
 import 'normalize.css';
 
-require('../node_modules/bootstrap/dist/css/bootstrap.min.css');
-
 import "styles/base/_main.sass"  // Global styles
 import "styles/base/_common.sass"  // Global styles
+
+require('../node_modules/bootstrap/dist/css/bootstrap.min.css');
 
 const Row = require('react-bootstrap').Row;
 const Jumbotron = require('react-bootstrap').Jumbotron;

@@ -33,7 +33,7 @@ class Property extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.getOwner = this.getOwner.bind(this);
         this.clearForm = this.clearForm.bind(this);
-
+        this.formId = this.formId.bind(this);
     }
 
     save() {
@@ -41,10 +41,7 @@ class Property extends React.Component {
         let savePromise = null;
         if (this.onlyNewMode ) {
             savePromise = propertyDal.create(this.state.data)
-                .then( () => {
-                    this.clearForm();
-                    this.setState({data: {}})
-                });
+                .then( () => this.clearForm());
         } else {
             savePromise = propertyDal.update(this.getOwner(), this.state.data);
         }
@@ -99,7 +96,8 @@ class Property extends React.Component {
     }
 
     clearForm() {
-        document.getElementById(`form-${this.getOwner()}`).reset();
+        document.getElementById(this.formId()).reset();
+        this.setState({data:{}})
     }
 
     renderField(label, fieldPath, type = 'text') {
@@ -127,6 +125,10 @@ class Property extends React.Component {
         return `${label}: ${value || ''}`;
     }
 
+    formId() {
+        return `form-${this.state.data.owner || 'new-property'}`
+    }
+
     render() {
 
         let saveBtn = null;
@@ -134,8 +136,9 @@ class Property extends React.Component {
             saveBtn = <Button bsStyle='warning' className='btn-block' onClick={this.save}>Save</Button>
         }
 
-        return <Row>
-            <form id={`form-${this.getOwner()}`}>
+        return <form id={this.formId()}>
+            <Row>
+
                 <Col xs={12} md={5} >
                     <Row>Property:</Row>
                     <Row>{this.renderField('Owner', 'owner')}</Row>
@@ -165,8 +168,9 @@ class Property extends React.Component {
                     }
                     <Row> {saveBtn} </Row>
                 </Col>
-            </form>
-        </Row>
+
+            </Row>
+        </form>
     }
 }
 

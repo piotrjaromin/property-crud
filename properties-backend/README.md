@@ -14,6 +14,7 @@ Routes defined by application can be found in `./routes/properties-endpoint.js`.
 - pagination for get endpoints
 - adding diff for history endpoint
 - think of removing knex init database and write normal sql
+- better handling of large integers (switch to bigint)
 
 ## Running application
 
@@ -21,6 +22,7 @@ To run application:
 
 ```bash
 npm i
+./start-db.sh # run only if postgres is not configured on localhost
 npm start
 ```
 

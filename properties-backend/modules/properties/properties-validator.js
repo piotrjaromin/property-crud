@@ -20,7 +20,7 @@ const propertySchema = Joi.object({
   address: addressSchema.required(),
   numberOfBedRooms: Joi.number().integer().min(0).required(),
   numberOfBathRooms: Joi.number().integer().min(1).required(),
-  airbnbID: Joi.string(),
+  airbnbID: Joi.string().min(1).required(),
   incomeGenerated: Joi.number().integer().min(1).required(),
 });
 
